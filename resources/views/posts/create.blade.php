@@ -1,14 +1,7 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <title>Blog</title>
-        
-        <!-- Fonts -->
-        
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-    
-    </head>
+<x-app-layout>
+    <x-slot name="header">
+        Header
+    </x-slot>
     <body>
         <h1>Blog Name</h1>
         <form action="/posts" method="POST">
@@ -20,11 +13,19 @@
             </div>
             <div class="body">
                 <h2>Body</h2>
-                <textarea name="post[body]" placeholder="今日も一日お疲れ様でした。">{{old('post.body')}}</textarea>
-                <p class="body__error" style="color:red">{{ $errors->first('post.body') }}</p>
+                <textarea name="post[body]" placeholder="今日も1日お疲れさまでした。"></textarea>
             </div>
-            <input type="submit" value="store">
-        <div class='footer'>
-            <a href="/">戻る</a>
+            <div class="category">
+                <h2>Category</h2>
+                <select name="post[category_id]">
+                    @foreach($categories as $category)
+                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+                <input type="submit" value="store">
+        </form>
+            <div class='footer'>
+                <a href="/">戻る</a>
     </body>
-</html>
+</x-app-layout>
